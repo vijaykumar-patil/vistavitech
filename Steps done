@@ -1,0 +1,66 @@
+✅ Steps Completed
+
+GCP VM Setup
+
+Created a Compute Engine instance (Debian/Ubuntu).
+
+Installed Docker + Docker Compose.
+
+Domain Pointing
+
+In your registrar’s DNS settings:
+
+Set A record for vistavitech.com → 34.93.103.188 (your VM IP).
+
+Set CNAME record for www.vistavitech.com → vistavitech.com.
+
+Waited for DNS propagation (verified with nslookup).
+
+Firewall Rules
+
+In GCP VM settings, enabled:
+
+✅ Allow HTTP traffic
+
+✅ Allow HTTPS traffic
+
+Caddy Setup (Reverse Proxy + SSL)
+
+Created a docker-compose.yml with:
+
+caddy service (handles HTTPS + certificates).
+
+vistavitech-site service (your website container).
+
+Mounted volumes for Caddyfile and cert storage.
+
+Caddyfile Configuration
+
+Initial config: reverse proxy vistavitech.com → vistavitech-site:80.
+
+SSL certificates automatically issued by Let’s Encrypt (verified by logs).
+
+GitHub Pages Conflict Fix
+
+Previously, www.vistavitech.com pointed to GitHub Pages (*.github.io).
+
+Removed/unpublished GitHub Pages to avoid split hosting.
+
+Updated DNS so www → vistavitech.com.
+
+Canonical Domain Setup
+
+Added redirect in Caddyfile:
+
+www.vistavitech.com → https://vistavitech.com
+
+Ensures one main domain for SEO & SSL consistency.
+
+Verification
+
+Logs confirm SSL cert obtained:
+
+certificate obtained successfully | identifier: vistavitech.com
+
+
+https://vistavitech.com loads correctly with valid SSL.

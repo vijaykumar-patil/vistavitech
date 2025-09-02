@@ -1,0 +1,10 @@
+# Redirect www → main domain
+www.vistavitech.com {
+        redir https://vistavitech.com{uri} permanent
+}
+
+# Main domain with forced HTTPS
+vistavitech.com {
+        encode gzip
+        reverse_proxy vistavitech-site:80
+}

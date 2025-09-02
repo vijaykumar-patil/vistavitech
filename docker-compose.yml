@@ -1,0 +1,30 @@
+version: "3.9"
+
+networks:
+  webnet:
+
+services:
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - webnet
+
+  vistavitech-site:
+    image: vijaykumarpatil/vistavitech:latest   # or nginx/httpd if static files
+    container_name: vistavitech-site
+    restart: unless-stopped
+    networks:
+      - webnet
+
+volumes:
+  caddy_data:
+  caddy_config:
